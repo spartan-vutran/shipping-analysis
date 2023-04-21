@@ -1,0 +1,117 @@
+version: "3"
+services:
+  # registry:
+  #   hostname: myregistry
+  #   container_name: registry_container_persistent
+  #   image: 'apache/nifi-registry:1.21.0'  # latest image as of 2021-11-09.
+  #   restart: on-failure
+  #   ports:
+  #       - "18080:18080"
+  #   environment:
+  #       - LOG_LEVEL=INFO
+  #       - NIFI_REGISTRY_DB_DIR=/opt/nifi-registry/nifi-registry-current/database
+  #       - NIFI_REGISTRY_FLOW_PROVIDER=file
+  #       - NIFI_REGISTRY_FLOW_STORAGE_DIR=/opt/nifi-registry/nifi-registry-current/flow_storage
+  #   volumes:
+  #       - ./nifi_registry/database:/opt/nifi-registry/nifi-registry-current/database
+  #       - ./nifi_registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
+
+
+  # nifi:
+  #   image: apache/nifi:1.20.0
+  #   container_name: nifi
+  #   ports:
+  #     - 8443:8443
+  #   environment:
+  #     - NIFI_WEB_HTTPS_PORT=8443
+  #     - SINGLE_USER_CREDENTIALS_USERNAME=vutl
+  #     - SINGLE_USER_CREDENTIALS_PASSWORD=0905353523vV!
+  #   volumes:
+  #     - ./nifi/database_repository:/opt/nifi/nifi-current/database_repository
+  #     - ./nifi/flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
+  #     - ./nifi/content_repository:/opt/nifi/nifi-current/content_repository
+  #     - ./nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
+  #     - ./nifi/state:/opt/nifi/nifi-current/state
+  #     - ./nifi/logs:/opt/nifi/nifi-current/logs
+  #     - ./nifi/conf:/opt/nifi/nifi-current/conf
+  #     - ./data:/usr/local/src/shipment/data
+  dashboard-simulator:
+    image:  narutosimaha/de-dashboard
+    ports:
+      - '3000:3000'
+  company-simulator:
+    container_name: mysql_local
+    restart: always
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    environment:
+      - MYSQL_DATABASE=shipping_data
+      - MYSQL_ROOT_PASSWORD=my_password
+    ports:
+      - '8081:3306'
+    volumes:
+      - ./sources/company/etc/mysql:/var/lib/mysql
+
+  shipment:
+    image: postgres:15.2
+    environment:
+      - POSTGRES_DB=shipment
+      - POSTGRES_USER=langteam
+      - POSTGRES_PASSWORD=Aa1234
+    ports:
+      - 5433:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "shipment", "-U", "langteam" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  shipment-flyway:
+    image: narutosimaha/flyway-warehouse
+    # command: -url=jdbc:postgresql://postgres:5432/ejabberd -user=ejabberd -password=ejabberd_password -connectRetries=60 migrate
+    environment:
+      - DATABASE_NAME=shipment
+      - DATABASE_URL=jdbc:postgresql://shipment:5432
+      - POSTGRES_USER=langteam
+      - POSTGRES_PASSWORD=Aa1234
+    # volumes:
+    #   - ./lec-db/langchat/sql:/flyway/sql
+    depends_on:
+      - shipment
+  
+  # # Pentaho BI
+  # pentaho:
+  #   container_name: pentaho
+  #   image: ca0abinary/docker-pentaho
+  #   depends_on:
+  #       - pentaho-pg
+  #   ports:
+  #       - "8080:8080"
+  #   environment:
+  #       - HOST=pentaho-pg
+  #       - USER=pentaho
+  #       - PASSWORD=password
+  #   volumes:
+  #       - pentaho-hsqldb-data:/opt/pentaho/server/pentaho-server/data/hsqldb
+  #       - pentaho-jackrabbit-data:/opt/pentaho/server/pentaho-server/pentaho-solutions/system/jackrabbit/repository
+
+  # # PostgreSQL Database for Pentaho BI
+  # pentaho-pg:
+  #   container_name: pentaho-pg
+  #   image: postgres:9.4
+  #   environment:
+  #       - POSTGRES_USER=pentaho
+  #       - POSTGRES_PASSWORD=password
+  #       - PGDATA=/var/lib/postgresql/data/pgdata
+  #   volumes:
+  #       - pentaho-pg-data:/var/lib/postgresql/data/pgdata
+
+volumes:
+  pgdata:
+  # pentaho-hsqldb-data:
+  # pentaho-jackrabbit-data:
+  # pentaho-pg-data:

@@ -72,18 +72,18 @@ services:
       timeout: 5s
       retries: 5
 
-  shipment-flyway:
-    image: narutosimaha/flyway-warehouse
-    # command: -url=jdbc:postgresql://postgres:5432/ejabberd -user=ejabberd -password=ejabberd_password -connectRetries=60 migrate
-    environment:
-      - DATABASE_NAME=shipment
-      - DATABASE_URL=jdbc:postgresql://shipment:5432
-      - POSTGRES_USER=langteam
-      - POSTGRES_PASSWORD=Aa1234
-    # volumes:
-    #   - ./lec-db/langchat/sql:/flyway/sql
-    depends_on:
-      - shipment
+  # shipment-flyway:
+  #   image: narutosimaha/flyway-warehouse
+  #   # command: -url=jdbc:postgresql://postgres:5432/ejabberd -user=ejabberd -password=ejabberd_password -connectRetries=60 migrate
+  #   environment:
+  #     - DATABASE_NAME=shipment
+  #     - DATABASE_URL=jdbc:postgresql://shipment:5432
+  #     - POSTGRES_USER=langteam
+  #     - POSTGRES_PASSWORD=Aa1234
+  #   # volumes:
+  #   #   - ./lec-db/langchat/sql:/flyway/sql
+  #   depends_on:
+  #     - shipment
   
   # # Pentaho BI
   # pentaho:

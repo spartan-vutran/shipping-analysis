@@ -582,93 +582,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SelectCompletedDate</from>
-      <to>SortCompletedDate</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>LoadDateKeyFromDateDimension</from>
-      <to>GetDateKeyInHouse</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>GetDateKeyInHouse</from>
-      <to>RawInHouseFactTable</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SortCompletedDate</from>
-      <to>GetDateKeyInHouse</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>GetDeliveryTime</from>
-      <to>RawInHouseFactTable</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>RawInHouseFactTable</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ConverstDateStringToTimeStamp</from>
-      <to>GetDeliveryTime</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>Data validator</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Data validator</from>
       <to>IngestInhouseShippingTable</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Add sequence 2</from>
-      <to>SelectCompletedDate</to>
+      <to>SelectLookUpField</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence 2</from>
-      <to>ConverstDateStringToTimeStamp</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SelectCompletedDate 2</from>
-      <to>SortCompletedDate 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>LoadDateKeyFromDateDimension 2</from>
-      <to>GetDateKey3rd</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>GetDateKey3rd</from>
-      <to>RawInHouseFactTable 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SortCompletedDate 2</from>
-      <to>GetDateKey3rd</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>GetDeliveryTime 2</from>
-      <to>RawInHouseFactTable 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>RawInHouseFactTable 2</from>
+      <from>RawServiceFactTable</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ConverstDateStringToTimeStamp 2</from>
-      <to>GetDeliveryTime 2</to>
+      <from>MetricFieldSelection</from>
+      <to>ComputeDeliveryDuration</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -683,15 +613,862 @@
     </hop>
     <hop>
       <from>Add sequence</from>
-      <to>SelectCompletedDate 2</to>
+      <to>MetricFieldSelection</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Add sequence</from>
-      <to>ConverstDateStringToTimeStamp 2</to>
+      <to>SelectCompletedDate 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SelectCompletedDate 2 2</from>
+      <to>LookupServiceKey</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LookupServiceKey</from>
+      <to>LookUpDate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ComputeDeliveryDuration</from>
+      <to>ComputeMetrics</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LoadRegionDimension</from>
+      <to>RegionMatching</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LookUpDate</from>
+      <to>RegionMatching</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ComputeMetrics</from>
+      <to>RawServiceFactTable</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>RegionMatching</from>
+      <to>RawServiceFactTable</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dummy (do nothing)</from>
+      <to>Truncate ServiceFactTable</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LookUpDate 2</from>
+      <to>RegionMatching 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LoadRegionDimension 2</from>
+      <to>RegionMatching 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SelectLookUpField</from>
+      <to>LookUpDate 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MetricFieldSelection 2</from>
+      <to>ComputePreArgument</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add sequence 2</from>
+      <to>MetricFieldSelection 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ComputePreArgument</from>
+      <to>ComputeDistanceInKm</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ComputeDistanceInKm</from>
+      <to>ComputeMetrics 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ComputeMetrics 2</from>
+      <to>RawInHouseFactTable</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>RegionMatching 2</from>
+      <to>RawInHouseFactTable</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>RawInHouseFactTable</from>
+      <to>Select values 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 3</from>
+      <to>Data validator</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dummy (do nothing) 2</from>
+      <to>Execute SQL script 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>Sequence</valuename>
+    <use_database>N</use_database>
+    <connection/>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add sequence 2</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>Sequence</valuename>
+    <use_database>N</use_database>
+    <connection/>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MetricFieldSelection</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>confirm_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>complete_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>expect_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Sequence</name>
+        <rename/>
+      </field>
+      <field>
+        <name>total_unit</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_unit</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_volume</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_cost</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>complete_at</name>
+        <rename>complete_at</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>confirm_at</name>
+        <rename>confirm_at</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data validator</name>
+    <type>Validator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <validate_all>N</validate_all>
+    <concat_errors>N</concat_errors>
+    <concat_separator>|</concat_separator>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data validator 2</name>
+    <type>Validator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <validate_all>N</validate_all>
+    <concat_errors>N</concat_errors>
+    <concat_separator>|</concat_separator>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1568</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Generate rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>url</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>http://localhost:3000/</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get3rdShipmentTable</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>shipment_id</name>
+        <rename/>
+      </field>
+      <select_unspecified>Y</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ComputeDeliveryDuration</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>DeliveryDuration</field_name>
+      <calc_type>DATE_DIFF_SEC</calc_type>
+      <field_a>complete_at</field_a>
+      <field_b>confirm_at</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>ExpectDuration</field_name>
+      <calc_type>DATE_DIFF_SEC</calc_type>
+      <field_a>expect_at</field_a>
+      <field_b>confirm_at</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>IngestInhouseShippingTable</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <schema>public</schema>
+    <table>inhouseshippingfact</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>datekey</column_name>
+        <stream_name>DateKey</stream_name>
+      </field>
+      <field>
+        <column_name>shipmentid</column_name>
+        <stream_name>ShipmentId</stream_name>
+      </field>
+      <field>
+        <column_name>employeeid</column_name>
+        <stream_name>EmployeeId</stream_name>
+      </field>
+      <field>
+        <column_name>regionid</column_name>
+        <stream_name>RegionId</stream_name>
+      </field>
+      <field>
+        <column_name>deliverydurationinsecond</column_name>
+        <stream_name>DeliveryDurationInSecond</stream_name>
+      </field>
+      <field>
+        <column_name>triptypeid</column_name>
+        <stream_name>TripTypeId</stream_name>
+      </field>
+      <field>
+        <column_name>ontimedelivery</column_name>
+        <stream_name>OnTimeDelivery</stream_name>
+      </field>
+      <field>
+        <column_name>distanceinkmiles</column_name>
+        <stream_name>DistanceInKMiles</stream_name>
+      </field>
+      <field>
+        <column_name>shipmentvolumeinunit</column_name>
+        <stream_name>ShipmentVolumeInUnit</stream_name>
+      </field>
+      <field>
+        <column_name>lossrate</column_name>
+        <stream_name>LossRate</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1472</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>IngestInhouseShippingTable 2</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <schema>public</schema>
+    <table>serviceshippingfact</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>datekey</column_name>
+        <stream_name>DateKey</stream_name>
+      </field>
+      <field>
+        <column_name>shipmentid</column_name>
+        <stream_name>ShipmentId</stream_name>
+      </field>
+      <field>
+        <column_name>servicetypeid</column_name>
+        <stream_name>ServiceTypeId</stream_name>
+      </field>
+      <field>
+        <column_name>regionid</column_name>
+        <stream_name>RegionId</stream_name>
+      </field>
+      <field>
+        <column_name>triptypeid</column_name>
+        <stream_name>TripTypeId</stream_name>
+      </field>
+      <field>
+        <column_name>deliverydurationinsecond</column_name>
+        <stream_name>DeliveryDurationInSecond</stream_name>
+      </field>
+      <field>
+        <column_name>ontimedelivery</column_name>
+        <stream_name>OnTimeDelivery</stream_name>
+      </field>
+      <field>
+        <column_name>deliverycostindollar</column_name>
+        <stream_name>DeliveryCostInDollar</stream_name>
+      </field>
+      <field>
+        <column_name>shipmentvolumeinkg</column_name>
+        <stream_name>ShipmentVolumeInKg</stream_name>
+      </field>
+      <field>
+        <column_name>lossrate</column_name>
+        <stream_name>LossRate</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1728</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON input</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
+    <includeNulls>N</includeNulls>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>shipment_id</name>
+        <path>$..shipment_id</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>trip_type</name>
+        <path>$..trip_type</path>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>confirm_at</name>
+        <path>$..confirm_at</path>
+        <type>Date</type>
+        <format>yyyy-MM-dd HH:mm:ss</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>complete_at</name>
+        <path>$..complete_at</path>
+        <type>Date</type>
+        <format>yyyy-MM-dd HH:mm:ss</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>distance</name>
+        <path>$..distance</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>address</name>
+        <path>$..address</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>region</name>
+        <path>$..region</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>country</name>
+        <path>$..country</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>expect_at</name>
+        <path>$..expect_at</path>
+        <type>Date</type>
+        <format>yyyy-MM-dd HH:mm:ss</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>total_unit</name>
+        <path>$..total_unit</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ship_unit</name>
+        <path>$..ship_unit</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ship_volume</name>
+        <path>$..ship_volume</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ship_cost</name>
+        <path>$..ship_cost</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>LoadInHouseData</name>
     <type>TableInput</type>
@@ -929,49 +1706,45 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
+      <xloc>80</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SelectDeliveryInfor</name>
-    <type>SelectValues</type>
+    <name>LookUpDate</name>
+    <type>DBLookup</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>approved_at</name>
-        <rename/>
-      </field>
-      <field>
+    <connection>DataWarehouse</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>5</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>datedimension</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
         <name>complete_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>trip_type</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DISTANCE</name>
-        <rename/>
-      </field>
-      <field>
-        <name>staff_id</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+        <field>date_actual</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>date_dim_id</name>
+        <rename>date_dim_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -981,8 +1754,62 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>480</yloc>
+      <xloc>1008</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LookupServiceKey</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>4</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>servicetypedimention</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
+        <name>distance</name>
+        <field>todistance</field>
+        <condition>&gt;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>distance</name>
+        <field>fromdistance</field>
+        <condition>&lt;=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>servicetypeid</name>
+        <rename>servicetypeid</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1039,8 +1866,8 @@
     </GUI>
   </step>
   <step>
-    <name>Get3rdShipmentTable</name>
-    <type>SelectValues</type>
+    <name>RawInHouseFactTable</name>
+    <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1049,196 +1876,151 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <join_type>INNER</join_type>
+    <step1>ComputeMetrics 2</step1>
+    <step2>RegionMatching 2</step2>
+    <keys_1>
+      <key>Sequence</key>
+    </keys_1>
+    <keys_2>
+      <key>Sequence</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>RawServiceFactTable</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>ComputeMetrics</step1>
+    <step2>RegionMatching</step2>
+    <keys_1>
+      <key>Sequence</key>
+    </keys_1>
+    <keys_2>
+      <key>Sequence</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1280</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
     <fields>
       <field>
-        <name>shipment_id</name>
-        <rename/>
+        <name>DeliveryDuration</name>
+        <rename>DeliveryDurationInSecond</rename>
+      </field>
+      <field>
+        <name>date_dim_id</name>
+        <rename>DateKey</rename>
       </field>
       <field>
         <name>trip_type</name>
+        <rename>TripTypeId</rename>
+      </field>
+      <field>
+        <name>Sequence</name>
+        <rename>ShipmentId</rename>
+      </field>
+      <field>
+        <name>ship_cost</name>
+        <rename>DeliveryCostInDollar</rename>
+      </field>
+      <field>
+        <name>ship_volume</name>
+        <rename>ShipmentVolumeInKg</rename>
+      </field>
+      <field>
+        <name>LossRate</name>
         <rename/>
       </field>
       <field>
-        <name>complete_at</name>
-        <rename/>
+        <name>regionid</name>
+        <rename>RegionId</rename>
       </field>
       <field>
-        <name>confirm_at</name>
-        <rename/>
+        <name>servicetypeid</name>
+        <rename>ServiceTypeId</rename>
       </field>
       <field>
-        <name>distance</name>
+        <name>OnTimeDelivery</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Generate rows</name>
-    <type>RowGenerator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>url</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>http://localhost:3000/</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>JSON input</name>
-    <type>JsonInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
-    <includeNulls>N</includeNulls>
-    <rownum_field/>
-    <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>shipment_id</name>
-        <path>$..shipment_id</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>trip_type</name>
-        <path>$..trip_type</path>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>confirm_at</name>
-        <path>$..confirm_at</path>
-        <type>Date</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>complete_at</name>
-        <path>$..complete_at</path>
-        <type>Date</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>distance</name>
-        <path>$..distance</path>
+      <meta>
+        <name>LossRate</name>
+        <rename>LossRate</rename>
         <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
+        <length>3</length>
+        <precision>2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>OnTimeDelivery</name>
+        <rename>OnTimeDelivery</rename>
+        <type>Number</type>
+        <length>3</length>
+        <precision>2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>result</valueField>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1248,86 +2030,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>96</yloc>
+      <xloc>1424</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>Sequence</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add sequence 2</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>Sequence</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SelectCompletedDate</name>
+    <name>SelectLookUpField</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1341,6 +2053,26 @@
       </field>
       <field>
         <name>Sequence</name>
+        <rename/>
+      </field>
+      <field>
+        <name>region</name>
+        <rename/>
+      </field>
+      <field>
+        <name>country</name>
+        <rename/>
+      </field>
+      <field>
+        <name>address</name>
+        <rename/>
+      </field>
+      <field>
+        <name>trip_type</name>
+        <rename/>
+      </field>
+      <field>
+        <name>staff_id</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -1377,239 +2109,7 @@
     </GUI>
   </step>
   <step>
-    <name>LoadDateKeyFromDateDimension</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DataWarehouse</connection>
-    <sql>SELECT date_dim_id,  date_actual FROM DateDimension ORDER BY date_actual ASC</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>Y</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>date_dim_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>LoadDateKeyFromDateDimension</origin>
-        <comments>date_dim_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Date</type>
-        <storagetype>normal</storagetype>
-        <name>date_actual</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>LoadDateKeyFromDateDimension</origin>
-        <comments>date_actual</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>560</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GetDateKeyInHouse</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>SortCompletedDate</step1>
-    <step2>LoadDateKeyFromDateDimension</step2>
-    <keys_1>
-      <key>complete_at</key>
-    </keys_1>
-    <keys_2>
-      <key>date_actual</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SortCompletedDate</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>/home/vutl/Documents/Learning/School/Post/DE/assignment/temp</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory>10</free_memory>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>complete_at</name>
-        <ascending>Y</ascending>
-        <case_sensitive>Y</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GetDeliveryTime</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>DeliveryTime</field_name>
-      <calc_type>DATE_DIFF_MN</calc_type>
-      <field_a>complete_at</field_a>
-      <field_b>approved_at</field_b>
-      <field_c>DISTANCE</field_c>
-      <value_type>Integer</value_type>
-      <value_length>4</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>RawInHouseFactTable</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>GetDeliveryTime</step1>
-    <step2>GetDateKeyInHouse</step2>
-    <keys_1>
-      <key>Sequence</key>
-    </keys_1>
-    <keys_2>
-      <key>Sequence</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ConverstDateStringToTimeStamp</name>
+    <name>SelectCompletedDate 2 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1621,225 +2121,23 @@
     </partitioning>
     <fields>
       <field>
-        <name>complete_at</name>
-        <rename/>
-      </field>
-      <select_unspecified>Y</select_unspecified>
-      <meta>
-        <name>complete_at</name>
-        <rename>complete_at</rename>
-        <type>Timestamp</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>approved_at</name>
-        <rename>approved_at</rename>
-        <type>Timestamp</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>DISTANCE</name>
-        <rename>DistanceInKMiles</rename>
-      </field>
-      <field>
-        <name>DeliveryTime</name>
+        <name>distance</name>
         <rename/>
       </field>
       <field>
-        <name>date_dim_id</name>
-        <rename>DateKey</rename>
+        <name>Sequence</name>
+        <rename/>
       </field>
       <field>
-        <name>staff_id</name>
-        <rename>EmployeeId</rename>
+        <name>complete_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>region</name>
+        <rename/>
       </field>
       <field>
         <name>trip_type</name>
-        <rename>TripTypeId</rename>
-      </field>
-      <field>
-        <name>Sequence</name>
-        <rename>ShipmentId</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data validator</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <validate_all>N</validate_all>
-    <concat_errors>N</concat_errors>
-    <concat_separator>|</concat_separator>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>IngestInhouseShippingTable</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DataWarehouse</connection>
-    <schema>public</schema>
-    <table>inhouseshippingfact</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>distanceinkmiles</column_name>
-        <stream_name>DistanceInKMiles</stream_name>
-      </field>
-      <field>
-        <column_name>deliverytime</column_name>
-        <stream_name>DeliveryTime</stream_name>
-      </field>
-      <field>
-        <column_name>datekey</column_name>
-        <stream_name>DateKey</stream_name>
-      </field>
-      <field>
-        <column_name>employeeid</column_name>
-        <stream_name>EmployeeId</stream_name>
-      </field>
-      <field>
-        <column_name>triptypeid</column_name>
-        <stream_name>TripTypeId</stream_name>
-      </field>
-      <field>
-        <column_name>shipmentid</column_name>
-        <stream_name>ShipmentId</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1216</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SelectCompletedDate 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>complete_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Sequence</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -1870,13 +2168,143 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>704</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>LoadDateKeyFromDateDimension 2</name>
+    <name>SelectDeliveryInfor</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename/>
+      </field>
+      <select_unspecified>Y</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ComputeMetrics</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>OntimeDelivery</field_name>
+      <calc_type>DIVIDE</calc_type>
+      <field_a>ExpectDuration</field_a>
+      <field_b>DeliveryDuration</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>LossRate</field_name>
+      <calc_type>DIVIDE</calc_type>
+      <field_a>ship_unit</field_a>
+      <field_b>total_unit</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>RegionMatching</name>
+    <type>FuzzyMatch</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>LoadRegionDimension</from>
+    <lookupfield>townorcityname</lookupfield>
+    <mainstreamfield>region</mainstreamfield>
+    <outputmatchfield>match</outputmatchfield>
+    <outputvaluefield>measure value</outputvaluefield>
+    <caseSensitive>N</caseSensitive>
+    <closervalue>Y</closervalue>
+    <minimalValue>0</minimalValue>
+    <maximalValue>1</maximalValue>
+    <separator>,</separator>
+    <algorithm>jaro</algorithm>
+    <lookup>
+      <value>
+        <name>regionid</name>
+        <rename>regionid</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LoadRegionDimension</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1887,7 +2315,7 @@
       <schema_name/>
     </partitioning>
     <connection>DataWarehouse</connection>
-    <sql>SELECT date_dim_id,  date_actual FROM DateDimension ORDER BY date_actual ASC</sql>
+    <sql>SELECT townorcityname, regionid FROM regiondimension</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1898,11 +2326,11 @@
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>date_dim_id</name>
+        <name>id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>LoadDateKeyFromDateDimension</origin>
-        <comments>date_dim_id</comments>
+        <origin>LoadInHouseData</origin>
+        <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1919,14 +2347,175 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Date</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>date_actual</name>
-        <length>-1</length>
+        <name>order_id</name>
+        <length>36</length>
         <precision>-1</precision>
-        <origin>LoadDateKeyFromDateDimension</origin>
-        <comments>date_actual</comments>
+        <origin>LoadInHouseData</origin>
+        <comments>order_id</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>staff_id</name>
+        <length>36</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>staff_id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>trip_type</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>trip_type</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>approved_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>approved_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>start_shipping_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>start_shipping_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>complete_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>complete_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>cancelled_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>cancelled_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>DISTANCE</name>
+        <length>10</length>
+        <precision>3</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>DISTANCE</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1951,14 +2540,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>208</yloc>
+      <xloc>992</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>GetDateKey3rd</name>
-    <type>MergeJoin</type>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1967,15 +2556,6 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
-    <step1>SortCompletedDate 2</step1>
-    <step2>LoadDateKeyFromDateDimension 2</step2>
-    <keys_1>
-      <key>complete_at</key>
-    </keys_1>
-    <keys_2>
-      <key>date_actual</key>
-    </keys_2>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1985,14 +2565,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>160</yloc>
+      <xloc>912</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SortCompletedDate 2</name>
-    <type>SortRows</type>
+    <name>Truncate ServiceFactTable</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2001,23 +2581,351 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <directory>/home/vutl/Documents/Learning/School/Post/DE/assignment/temp</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory>10</free_memory>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
+    <connection>DataWarehouse</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>TRUNCATE serviceshippingfact CASCADE;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LookUpDate 2</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>5</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>datedimension</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
         <name>complete_at</name>
-        <ascending>Y</ascending>
-        <case_sensitive>Y</case_sensitive>
-        <collator_enabled>N</collator_enabled>
+        <field>date_actual</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>date_dim_id</name>
+        <rename>date_dim_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>RegionMatching 2</name>
+    <type>FuzzyMatch</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>LoadRegionDimension 2</from>
+    <lookupfield>townorcityname</lookupfield>
+    <mainstreamfield>region</mainstreamfield>
+    <outputmatchfield>match</outputmatchfield>
+    <outputvaluefield>measure value</outputvaluefield>
+    <caseSensitive>N</caseSensitive>
+    <closervalue>Y</closervalue>
+    <minimalValue>0</minimalValue>
+    <maximalValue>1</maximalValue>
+    <separator>,</separator>
+    <algorithm>jaro</algorithm>
+    <lookup>
+      <value>
+        <name>regionid</name>
+        <rename>regionid</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LoadRegionDimension 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <sql>SELECT townorcityname, regionid FROM regiondimension</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>Y</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
         <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>order_id</name>
+        <length>36</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>order_id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>staff_id</name>
+        <length>36</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>staff_id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>trip_type</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>trip_type</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>approved_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>approved_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>start_shipping_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>start_shipping_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>complete_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>complete_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>cancelled_at</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>cancelled_at</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>DISTANCE</name>
+        <length>10</length>
+        <precision>3</precision>
+        <origin>LoadInHouseData</origin>
+        <comments>DISTANCE</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Ho_Chi_Minh</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -2027,88 +2935,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>96</yloc>
+      <xloc>752</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>GetDeliveryTime 2</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>DeliveryTime</field_name>
-      <calc_type>DATE_DIFF_MN</calc_type>
-      <field_a>complete_at</field_a>
-      <field_b>confirm_at</field_b>
-      <field_c>DISTANCE</field_c>
-      <value_type>Integer</value_type>
-      <value_length>4</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>RawInHouseFactTable 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>GetDateKey3rd</step1>
-    <step2>GetDeliveryTime 2</step2>
-    <keys_1>
-      <key>Sequence</key>
-    </keys_1>
-    <keys_2>
-      <key>Sequence</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ConverstDateStringToTimeStamp 2</name>
+    <name>MetricFieldSelection 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2119,7 +2952,35 @@
       <schema_name/>
     </partitioning>
     <fields>
-      <select_unspecified>Y</select_unspecified>
+      <field>
+        <name>complete_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>approved_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>expect_shipping_data</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Sequence</name>
+        <rename/>
+      </field>
+      <field>
+        <name>order_quantity</name>
+        <rename/>
+      </field>
+      <field>
+        <name>lost_quantity</name>
+        <rename/>
+      </field>
+      <field>
+        <name>distance</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
       <meta>
         <name>complete_at</name>
         <rename>complete_at</rename>
@@ -2138,12 +2999,63 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>confirm_at</name>
-        <rename>confirm_at</rename>
+        <name>approved_at</name>
+        <rename>approved_at</rename>
         <type>Timestamp</type>
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>expect_shipping_data</name>
+        <rename>expect_shipping_data</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>order_quantity</name>
+        <rename>order_quantity</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>lost_quantity</name>
+        <rename>lost_quantity</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -2164,41 +3076,68 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>304</yloc>
+      <xloc>400</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
+    <name>ComputePreArgument</name>
+    <type>Calculator</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>DeliveryTime</name>
-        <rename/>
-      </field>
-      <field>
-        <name>date_dim_id</name>
-        <rename>DateKey</rename>
-      </field>
-      <field>
-        <name>trip_type</name>
-        <rename>TripTypeId</rename>
-      </field>
-      <field>
-        <name>Sequence</name>
-        <rename>ShipmentId</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>DeliveryDuration</field_name>
+      <calc_type>DATE_DIFF_SEC</calc_type>
+      <field_a>complete_at</field_a>
+      <field_b>approved_at</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>ExpectDuration</field_name>
+      <calc_type>DATE_DIFF_SEC</calc_type>
+      <field_a>expect_shipping_data</field_a>
+      <field_b>approved_at</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>ShipUnit</field_name>
+      <calc_type>SUBTRACT</calc_type>
+      <field_a>order_quantity</field_a>
+      <field_b>lost_quantity</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -2208,14 +3147,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
-      <yloc>304</yloc>
+      <xloc>544</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Data validator 2</name>
-    <type>Validator</type>
+    <name>ComputeMetrics 2</name>
+    <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2224,9 +3163,155 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <validate_all>N</validate_all>
-    <concat_errors>N</concat_errors>
-    <concat_separator>|</concat_separator>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>OntimeDelivery</field_name>
+      <calc_type>DIVIDE</calc_type>
+      <field_a>ExpectDuration</field_a>
+      <field_b>DeliveryDuration</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>LossRate</field_name>
+      <calc_type>DIVIDE</calc_type>
+      <field_a>ShipUnit</field_a>
+      <field_b>order_quantity</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>4</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ComputeDistanceInKm</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>DistanceInKmiles</field_name>
+      <formula_string>[distance]/1000</formula_string>
+      <value_type>Number</value_type>
+      <value_length>0</value_length>
+      <value_precision>2</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>date_dim_id</name>
+        <rename>DateKey</rename>
+      </field>
+      <field>
+        <name>Sequence</name>
+        <rename>ShipmentId</rename>
+      </field>
+      <field>
+        <name>staff_id</name>
+        <rename>EmployeeId</rename>
+      </field>
+      <field>
+        <name>regionid</name>
+        <rename>RegionId</rename>
+      </field>
+      <field>
+        <name>trip_type</name>
+        <rename>TripTypeId</rename>
+      </field>
+      <field>
+        <name>DeliveryDuration</name>
+        <rename>DeliveryDurationInSecond</rename>
+      </field>
+      <field>
+        <name>OntimeDelivery</name>
+        <rename>OnTimeDelivery</rename>
+      </field>
+      <field>
+        <name>DistanceInKMiles</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ShipUnit</name>
+        <rename>ShipmentVolumeInUnit</rename>
+      </field>
+      <field>
+        <name>LossRate</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>DistanceInKMiles</name>
+        <rename>DistanceInKMiles</rename>
+        <type>Number</type>
+        <length>6</length>
+        <precision>2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -2237,13 +3322,13 @@
     </remotesteps>
     <GUI>
       <xloc>1184</xloc>
-      <yloc>160</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>IngestInhouseShippingTable 2</name>
-    <type>TableOutput</type>
+    <name>Dummy (do nothing) 2</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2252,41 +3337,6 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>DataWarehouse</connection>
-    <schema>public</schema>
-    <table>serviceshippingfact</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>deliverytime</column_name>
-        <stream_name>DeliveryTime</stream_name>
-      </field>
-      <field>
-        <column_name>datekey</column_name>
-        <stream_name>DateKey</stream_name>
-      </field>
-      <field>
-        <column_name>triptypeid</column_name>
-        <stream_name>TripTypeId</stream_name>
-      </field>
-      <field>
-        <column_name>shipmentid</column_name>
-        <stream_name>ShipmentId</stream_name>
-      </field>
-    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -2296,8 +3346,46 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
-      <yloc>160</yloc>
+      <xloc>832</xloc>
+      <yloc>800</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script 2</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DataWarehouse</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>TRUNCATE inhouseshippingfact CASCADE;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

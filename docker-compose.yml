@@ -39,6 +39,8 @@ services:
     image:  narutosimaha/de-dashboard
     ports:
       - '3000:3000'
+    volumes:
+      - ./sources/dashboard/server.js:/usr/src/app/server.js
   company-simulator:
     container_name: mysql_local
     restart: always
@@ -62,7 +64,7 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./warehouse/sql/data:/var/lib/postgresql/data/
     restart: always
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "shipment", "-U", "langteam" ]
@@ -109,9 +111,3 @@ services:
   #       - PGDATA=/var/lib/postgresql/data/pgdata
   #   volumes:
   #       - pentaho-pg-data:/var/lib/postgresql/data/pgdata
-
-volumes:
-  pgdata:
-  # pentaho-hsqldb-data:
-  # pentaho-jackrabbit-data:
-  # pentaho-pg-data:

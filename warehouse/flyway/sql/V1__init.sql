@@ -88,7 +88,7 @@ COMMIT;
 
 CREATE TABLE RegionDimension (
 	RegionId integer NOT NULL PRIMARY KEY,
-  Address varchar(32),
+  Address varchar(100),
   StreetName varchar(32),
   TownOrCityName varchar(32),
   StateName varchar(32),
@@ -104,7 +104,9 @@ CREATE TABLE EmployeeDimension (
 
 CREATE TABLE ServiceTypeDimention (
 	ServiceTypeId integer NOT NULL PRIMARY KEY,
-  ServiceType varchar(32) -- Value: short-distance, medium-distance, long-distances
+  FromDistance decimal(7, 2), --From this distance the service type will be applied
+  ToDistance decimal(7, 2), --TO this distance the service type will be applied
+  ServiceType varchar(32), -- Value: short-distance, medium-distance, long-distances
   ServiceDescription varchar(32)
 );
 
@@ -119,7 +121,7 @@ CREATE TABLE TripType (
 -------------
 -- NOTE: I divide the requirements in to 2 fact tables for easily tracking the performance for 2 type of shipping type: In-house Employee and 3rd service:
 -- + InHouseShippingFact: We want to know DistanceInKMiles which indicate number of km a employee drives.
--- + ServiceShippingFact: We want to know more about whether the cose we spend is paid of on different service: short-distance, medium-distance, long-distances
+-- + ServiceShippingFact: We want to know more about whether the cost we spend is paid off on different service: short-distance, medium-distance, long-distances
 -------------
 
 -- To track performance for awarding to employee
@@ -131,17 +133,16 @@ CREATE TABLE InHouseShippingFact (
   TripTypeId integer,
 
 
-  DeliveryTime integer,
-  OnTimeDelivery integer,
+  DeliveryDurationInSecond integer,
+  OnTimeDelivery decimal(3,2),
   DistanceInKMiles decimal(6,2), -- We want to know how many miles am employee has traveled
-  ShipmentVolume integer, -- We want to know The amount of volume an employee ship
-  LostRate integer,
+  ShipmentVolumeInUnit integer, -- We want to know The amount of volume an employee ship
+  LossRate decimal(3,2),
   
 
   FOREIGN KEY(DateKey) REFERENCES DateDimension(date_dim_id) ON DELETE CASCADE,
   FOREIGN KEY(EmployeeId) REFERENCES EmployeeDimension(EmployeeId) ON DELETE CASCADE,
   FOREIGN KEY(RegionId) REFERENCES RegionDimension(RegionId) ON DELETE CASCADE,
-  FOREIGN KEY(ShipmentId) REFERENCES ShipmentDimension(ShipmentId) ON DELETE CASCADE,
   FOREIGN KEY(TripTypeId) REFERENCES TripType(TripTypeId) ON DELETE CASCADE
 );
 
@@ -154,19 +155,18 @@ CREATE TABLE ServiceShippingFact (
   RegionId integer,
   TripTypeId integer,
 
-  DeliveryTime integer,
-  OnTimeDelivery integer,
-  DeliveryCost integer,  -- We want to know the cost spending on service
-  ShipmentVolume integer,
-  LostRate integer,
+  DeliveryDurationInSecond integer,
+  OnTimeDelivery decimal(3,2),
+  DeliveryCostInDollar decimal(8,2),  -- We want to know the cost spending on service
+  ShipmentVolumeInKg decimal(6,2),
+  LossRate decimal(3,2),
 
   FOREIGN KEY(DateKey) REFERENCES DateDimension(date_dim_id) ON DELETE CASCADE,
   FOREIGN KEY(RegionId) REFERENCES RegionDimension(RegionId) ON DELETE CASCADE,
-  FOREIGN KEY(ShipmentId) REFERENCES ShipmentDimension(ShipmentId) ON DELETE CASCADE,
   FOREIGN KEY(ServiceTypeId) REFERENCES ServiceTypeDimention(ServiceTypeId) ON DELETE CASCADE,
   FOREIGN KEY(TripTypeId) REFERENCES TripType(TripTypeId) ON DELETE CASCADE
 );
 
 INSERT INTO TripType(TripTypeId, TripType) VALUES (0, 'One round'), (1, 'Two round');
 
-INSERT INTO ServiceTypeDimention(ServiceTypeId, ServiceType) VALUES (0, 'short-distance'), (1, 'medium-distance'), (2, 'long-distance');
+INSERT INTO ServiceTypeDimention(ServiceTypeId, FromDistance, ToDistance,ServiceType, ServiceDescription) VALUES (0, 0, 3,'short-distance', 'Short-distance service'), (1, 3, 10, 'medium-distance', 'medium-distance service'), (2, 10, 20, 'long-distance', 'long-distance service');
